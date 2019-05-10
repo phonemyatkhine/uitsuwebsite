@@ -7,9 +7,12 @@
 		      <th scope="col">Id</th>
 		      <th scope="col">Name</th>
 		      <th scope="col">Description</th>
-		      <th scope="col">Founding Date</th>
-		      <th scope="col">Committees Id</th>
-		      <th scope="col">Logo</th>
+		      <th scope="col">Date</th>
+		      <th scope="col">Time Start</th>
+		      <th scope="col">Tags</th>
+					<th scope="col">Clubs</th>
+					<th scope="col">Time End</th>
+					<th scope="col">Photos</th>
 		      <th scope="col">View</th>
 		      <th scope="col">Edit</th>
 		      <th scope="col">Delete</th>
@@ -18,25 +21,39 @@
 		  <tbody>
 
 		  	@foreach($data as $abc)
-		  	<tr>		  			
+		  	<tr>
 	  			<td>
 	  				{{$abc->id}}
 	  			</td>
 	  			<td>
-	  				{{$abc->name}}	
+	  				{{$abc->name}}
 	  			</td>
 	  			<td>
-	  				{{$abc->description}}	
+	  				{{$abc->description}}
 	  			</td>
 	  			<td>
-	  				{{$abc->founding_date}}	
+	  				{{$abc->date}}
 	  			</td>
 	  			<td>
-	  				{{$abc->committees_id}}	
+	  				{{$abc->time}}
 	  			</td>
-	  			<td>
-	  				<img src="eventsLogos/{{$abc->logo}}" style="width: 100px; height: 100px;">	  					
-	  			</td>
+					<td>
+						{{$abc->tags_id}}
+					</td>
+					<td>
+						{{$abc->clubs_id}}
+					</td>
+					<td>
+						{{$abc->time}}
+					</td>
+					@foreach($photo as $pbc)
+					<?php if($pbc->events_id== $abc->id){
+						?>
+					 	<td>
+ 	  					<img src="eventsPhotos/{{$pbc->photo}}" style="width: 100px; height: 100px;">
+ 	  				</td>
+					<?php } ?>
+					@endforeach
   				<td>
 	  				<form action="/events/{{$abc->id}}" method="GET">
 	  					@csrf
@@ -62,5 +79,5 @@
 		</table>
 		<a href="{{URL::to('/events/create')}}">Create events</a>
 	</div>
-		
+
 	@endsection

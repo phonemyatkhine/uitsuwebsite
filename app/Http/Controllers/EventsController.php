@@ -15,8 +15,8 @@ class EventsController extends Controller
   public function index()
     {
         $data = events::all();
-        $model = new events;
-        return view('crud.events.index',compact('data'));
+        $photo = eventsphotos::all();
+        return view('crud.events.index',compact('data','photo'));
     }
 
     public function create()
@@ -29,7 +29,7 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $events = new events;
-        $events_photos = new EventsPhotos;
+
 
         $events->name = $request->name;
         $events->description = $request->description;
@@ -42,19 +42,20 @@ class EventsController extends Controller
         $events->save();
 
         $photo_count = $request->photo_count;
-
-        for ($i=0; $i <=$photo_count ; $i++) { 
-
-                    if(Input::hasfile($photo[$i])) {
-                        $photo = Input::file('photo[$i]');
+        for ($i=0; $i <=$photo_count-1 ; $i++) {
+                    $events_photos = new EventsPhotos;
+                    if(Input::hasFile('photo')) {
+                        $files = Input::file('photo');
+                        $photo = $files[$i];
                         $events_photos->events_id = $events->id;
-                        $photo1->move('eventsPhotos', $photo->getClientOriginalName());
+                        $photo->move('eventsPhotos', $photo->getClientOriginalName());
                         $events_photos->photo = $photo->getClientOriginalName();
+                        $events_photos->save();
                     } else {
                         return back()->with('danger','Files Upload has errors.');
                     }
-                }        
-                
+                }
+
         return redirect('/events');
 
     }
@@ -68,8 +69,8 @@ class EventsController extends Controller
     }
 
     public function edit($id)
-    {   
-        
+    {
+
         $events = events::where('id',$id)->first();
          $committees = committees::all();
         return view('crud.events.edit',compact('events','committees'));
@@ -78,7 +79,7 @@ class EventsController extends Controller
 
 
     public function update(Request $request, $id)
-    {   
+    {
 
         $new_id = $request->id;
         $name = $request->name;
@@ -117,4 +118,3 @@ class EventsController extends Controller
         return redirect('/events');
     }
 }
-

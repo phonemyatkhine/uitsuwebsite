@@ -18,8 +18,8 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->longText('description');
             $table->date('date');
-            $table->time('time');
-            $table->unsignedInteger('tags_id')->nullable();
+            $table->time('start_time');
+            $table->time('end_time');
             $table->unsignedInteger('clubs_id')->nullable();
             /*$table->foreign('tag_id')->references('tag_id')->on('tags_en')->nullable();
             $table->foreign('club_id')->references('club_id')->on('clubs_en')->nullable();*/

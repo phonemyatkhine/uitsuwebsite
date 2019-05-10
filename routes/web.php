@@ -24,11 +24,11 @@ Route::resource('/organizers', 'OrganizersController');
 Route::resource('/majors', 'MajorsController');
 Route::resource('/events','EventsController');
 
-Route::get('/crud','CrudController@index');
-Route::get('/crud/{table}','CrudController@show');
-Route::get('/crud/{table}/create','CrudController@create');
-Route::post('/crud/{table}','CrudController@store');
-Route::delete('/crud/{table}/{id}','CrudController@delete');
+// Route::get('/crud','CrudController@index');
+// Route::get('/crud/{table}','CrudController@show');
+// Route::get('/crud/{table}/create','CrudController@create');
+// Route::post('/crud/{table}','CrudController@store');
+// Route::delete('/crud/{table}/{id}','CrudController@delete');
 
 
 
