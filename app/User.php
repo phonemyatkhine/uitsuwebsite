@@ -38,10 +38,12 @@ class User extends Authenticatable
     }
 
     public function hasPosition($position) {
-        if(Positions::where(Positions::where('name', $position)->first()->id , Auth::user()->positions_id)) {
-            return true;
-        } else {
-            return false;
+        if(Positions::where('level', Auth::user()->positions_id)->first()) {
+            if(Positions::where('level', Auth::user()->positions_id)->first()->name == $position) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
