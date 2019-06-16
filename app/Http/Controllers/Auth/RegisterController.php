@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Positions;
+use App\Years;
+use App\Majors;
 
 class RegisterController extends Controller
 {
@@ -52,6 +55,11 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'position' => ['required', 'string'],
+            'major' => ['required' ],
+            'year' => ['required'],
+            'uno' => ['required'],
+            'start_date' => ['required']
         ]);
     }
 
@@ -67,6 +75,22 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'positions_id'=> $data['position'],
+            'majors_id'=> $data['major'],
+            'years_id'=> $data['year'],
+            'uno'=> $data['uno'],
+            'status'=>true,
+            'start_date'=>$data['start_date'],
         ]);
+    }
+
+    public function registerform() {
+
+      $positions = Positions::all();
+      $years = Years::all();
+      $majors = Majors::all();
+
+      return view('auth.register',compact('postions','years','majors'));
+
     }
 }
