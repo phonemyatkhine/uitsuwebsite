@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Positions extends Model
 {
-    //
+    public function user() {
+        $this->hasMany('App\User');
+    }
 }

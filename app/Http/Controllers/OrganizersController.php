@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Organizers;
+use App\User;
 use Illuminate\Http\Request;
 
 class OrganizersController extends Controller
@@ -25,7 +26,8 @@ class OrganizersController extends Controller
 
         $organizers = new organizers;
         $organizers->name = $request->name;
-        $organizers->description = $request->description;
+        $organizers->email = User::where('name', $request->name)->first()->email;
+        $organizers->password = User::where('name', $request->name)->first()->password;
         $organizers->save();
 
         return redirect('/organizers');

@@ -27,4 +27,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function position() {
+        $this->belongsTo('App\Positions');
+    }
+
+    public function organizer() {
+        $this->belongsTo(Organizers::class);
+    }
 }
