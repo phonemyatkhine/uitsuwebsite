@@ -90,7 +90,7 @@ class RegisterController extends Controller
       $years = Years::all();
       $majors = Majors::all();
 
-      return view('auth.register',compact('postions','years','majors'));
+      return view('auth.register', compact('positions','years','majors'));
 
     }
 }

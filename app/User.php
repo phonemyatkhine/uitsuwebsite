@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -27,4 +28,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function position() {
+        $this->belongsTo('App\Positions');
+    }
+
+    public function organizer() {
+        $this->belongsTo(Organizers::class);
+    }
+
+    public function hasPosition($position) {
+        if(Positions::where('level', Auth::user()->positions_id)->first()) {
+            if(Positions::where('level', Auth::user()->positions_id)->first()->name == $position) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }
