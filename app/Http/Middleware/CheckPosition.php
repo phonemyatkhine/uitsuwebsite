@@ -17,9 +17,13 @@ class CheckPosition
     public function handle($request, Closure $next, $position)
     {
         if(Auth::user()->hasPosition($position) && Auth::check()) {
+
             return $next($request);
+
         } else {
+
             return redirect('/');
+            
         }
         
     }
