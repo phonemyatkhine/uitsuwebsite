@@ -46,7 +46,7 @@ class OrganizersController extends Controller
     {   
         
         $organizers = organizers::where('id',$id)->first();
-        return view('crud.organizers.edit',compact('organizers'));
+        return view('crud.organizers.edit', compact('organizers'));
 
     }
 
@@ -56,13 +56,11 @@ class OrganizersController extends Controller
 
         $new_id = $request->id;
         $name = $request->name;
-        $description = $request->description;
         $organizers = organizers::find($id);
         if($new_id != $id) {
             $organizers->id = $new_id;
         }
         $organizers->name = $name;
-        $organizers->description = $description;
         $organizers->save();
         return redirect('/organizers');
     }
