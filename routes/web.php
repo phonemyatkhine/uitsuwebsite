@@ -31,11 +31,6 @@ Route::resource('/events','EventsController');
 // Route::delete('/crud/{table}/{id}','CrudController@delete');
 
 
-Route::group(['middleware' => ['auth', 'CheckPosition:chairman']], function() {
-    Route::get('/admin', function() {
-        return "<h1>Hello Chairman</h1>";
-    });
-});
 
 Auth::routes();
 
