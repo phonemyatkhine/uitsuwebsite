@@ -1,0 +1,156 @@
+nav {
+  background-color: #00c7ff;
+  text-transform: uppercase;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+nav img {
+  height: 50px;
+}
+
+html, body {
+  height: 100%;
+  min-width: 300px;
+}
+
+#intro-section {
+  position: relative;
+  height: 100%;
+  background-image: url("/image/cover-one.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  min-width: 300px;
+}
+
+#intro-section::before {
+  content: "";
+  z-index: 0;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}
+
+#intro-section h1 {
+  text-shadow: 2px 2px 8px black;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  #intro-section h1 {
+    text-align: left;
+    font-size: 44px;
+  }
+}
+
+#intro-section p {
+  width: 100%;
+  text-shadow: 2px 2px 8px black;
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  #intro-section p {
+    text-align: left;
+  }
+}
+
+#mission-section {
+  height: 300px;
+  background-image: url("/image/mission-bg-two.png");
+  position: relative;
+}
+
+#mission-section::before {
+  content: "";
+  z-index: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.075);
+  top: 0px;
+  left: 0px;
+}
+
+#mission-section h1 {
+  font-weight: 700;
+  font-size: 36px;
+}
+
+#mission-section p {
+  text-align: center;
+}
+
+#event-section {
+  height: 100%;
+}
+
+.section-title {
+  margin-bottom: 40px;
+}
+
+.section-title h1 {
+  display: inline-block;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.section-title p {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.section-title a.custom-btn {
+  color: #000000;
+  display: block;
+  border: 2px solid #00c7ff;
+  padding: 7px 12px;
+}
+
+.section-title a.custom-btn:hover {
+  border-color: #ffc000 !important;
+  background-color: #ffc000 !important;
+  color: #ffffff !important;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  border-top: 1px solid #ffc000;
+  width: 39px;
+  height: 1px;
+}
+
+time .date {
+  line-height: 1;
+  font-size: 45px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: inline-block;
+  color: #ffc000;
+}
+
+time .month {
+  font-size: 14px;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: inline-block;
+}
+
+time .day {
+  font-size: 24px;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: inline-block;
+  font-weight: lighter;
+}
+/*# sourceMappingURL=style.css.map */
