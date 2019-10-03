@@ -30,6 +30,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Accounts</a>
                 </li>
+                @else
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="account" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
+                    <div class="dropdown-menu dropdown-primary text-capitalize" aria-labelledby="account">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                         {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                         @csrf
+                    </form>
+                    </div>
+                </li>
                 @endif
             </ul>
         </div>

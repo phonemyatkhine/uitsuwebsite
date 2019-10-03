@@ -7,7 +7,8 @@
             <div class="row align-self-center">
                 <div class="container" id="register-form-container">
                     <h1>Register Here</h1>
-                    <form id="register-form" class="mb-3">
+                    <form id="register-form" method="POST" action="{{ route('register') }}" class="mb-3">
+                        @csrf
                         <div class="md-form">
                             <input type="text" id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" autofocus required>
                             <label for="name">Full Name</label>
@@ -18,11 +19,13 @@
                             @endif
                         </div>
                         <div class="md-form">
-                            <input type="text" id="student_id" class="form-control" name="student_id" value="{{ old('student_id') }}" required>
+                            <input type="text" id="student_id" class="form-control{{ $errors->has('student_id') ? ' is-invalid' : '' }}" name="student_id" value="{{ old('student_id') }}" required>
                             <label for="student_id">Student ID</label>
-                            <div class="invalid-feedback">
-                                <strong id="student_id_error_feedback"></strong>
-                            </div>
+                            @if ($errors->has('student_id'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('student_id') }}</strong>
+                            </span>
+                            @endif
                         </div>
                         <div class="md-form">
                             <input type="email" id="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
@@ -54,31 +57,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('add-js')
-<script>
-    var shouldSubmit = false;
-    $('#student_id').on('input', (e) => {
-        var value = $('#student_id').val();
-        var pattern = /^\d[A-Za-z]{2,3}-\d+$/;
-        if( !pattern.test(value) ) {
-            $('#student_id').addClass('is-invalid');
-            $('#student_id_error_feedback').text("Invalid Student ID");
-            shouldSubmit = false;
-        } else {
-            $('#student_id').removeClass('is-invalid');
-            $('#student_id_error_feedback').text('');
-            shouldSubmit = true;
-        }
-    });
-    $('#register-form').submit((e) => {
-        if(!shouldSubmit) {
-            e.preventDefault();
-            if( $('#student_id').hasClass('is-invalid') ) {
-                $('#student_id').focus();
-            }
-        }
-    })
-</script>
 @endsection
