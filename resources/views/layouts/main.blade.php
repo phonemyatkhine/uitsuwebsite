@@ -43,6 +43,11 @@
 
 </head>
 <body>
+    <!-- page preloader -->
+    <div id="loader" class="loader-holder">
+        <div class="block"><img src="{{ asset('image/svg/hearts.svg') }}" width="100" alt="loader"></div>
+    </div>
+
     <!-- add navbar -->
     @include('includes.navbar')
 
@@ -65,29 +70,34 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
     <!-- required on ready -->
     <script>
-        $(document).ready(() => {
-            if(window.innerWidth < 992) {
-                $("nav .navbar-brand img").attr("src", "{{ asset(env('APP_LOGO_2')) }}");
-            }
-        });
+        // nothing 
     </script>
     <!-- custom js script -->
     <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
 
-    <!-- 
-        
-    </> Coded with <3 Love by H31iUM [ Hein Thanth - https://heinthanth.com ] 
-
-    U)    uu I)iiii T)tttttt               H)    hh  3)###  X)    xx 
-    U)    uu   I)      T)                  H)    hh 3)   ##  X)  xx  
-    U)    uu   I)      T)       x)   XX    H)hhhhhh    3)#    X)xx   
-    U)    uu   I)      T)         x)X      H)    hh      3)   X)xx   
-    U)    uu   I)      T)         x)X      H)    hh 3)   ##  X)  xx  
-     U)uuuu  I)iiii    T)       x)   XX    H)    hh  3)###  X)    xx
+<!-- 
     
+    UI/UX template by 
+    * A N Phyoe
+    * Aung Htet Nyein
+    * Phyo Hein Kyaw
+
+    Minified template by
+    * Hein Thanth
+
+    Backend by
+    * Phone Myat Khine
+    * Hein Thanth
+     ____ ___.______________   _________ __            .___             __         /\  ____ ___      .__               
+    |    |   \   \__    ___/  /   _____//  |_ __ __  __| _/____   _____/  |_  _____)/ |    |   \____ |__| ____   ____  
+    |    |   /   | |    |     \_____  \\   __\  |  \/ __ |/ __ \ /    \   __\/  ___/  |    |   /    \|  |/  _ \ /    \ 
+    |    |  /|   | |    |     /        \|  | |  |  / /_/ \  ___/|   |  \  |  \___ \   |    |  /   |  \  (  <_> )   |  \
+    |______/ |___| |____|    /_______  /|__| |____/\____ |\___  >___|  /__| /____  >  |______/|___|  /__|\____/|___|  /
+                                     \/                 \/    \/     \/          \/                \/               \/ 
+                                     
     Copyright (c) {{ date('Y') }} UIT Student Union. All Rights Reserved
     
-    -->
+-->
 
 </body>
 </html>

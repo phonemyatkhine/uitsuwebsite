@@ -1,11 +1,12 @@
 @extends('layouts.main')
 
 @section('main')
+
 <div id="intro-section">
     <div class="container h-100">
         <div class="d-flex h-100">
             <div class="row align-self-center">
-                <div class="container" style="max-width: 562px; z-index: 1;">
+                <div class="container" id="intro-text-wrapper">
                     <h1>University of Information Technology Students' Union</h1>
                     <p>We offer the most complete course pakage in the country, for the research, design and development of Education.</p>
                 </div>
@@ -13,8 +14,9 @@
         </div>
     </div>
 </div>
+
 <!-- missions sliders -->
-<div id="mission-section" class="mb-5">
+<div id="mission-section">
     <div class="container h-100">
         <div class="d-flex h-100 justify-content-center">
             <div class="row align-self-center justify-content-center w-100">
@@ -44,27 +46,11 @@
         </div>
     </div>
 </div>
-<!-- events -->
-<div id="event-section">
-    <div class="container">
-        <div class="section-title">
-            <div>
-                <h1>Upcoming Events</h1>
-                <div class="float-right">
-                    <a href="#" class="custom-btn">View More</a>
-                </div>
-            </div>
-            <p>Recent and upcoming educational events listed here</p>
-        </div>
-        <div class="event">
-            <div class="event-time">
-                <time datetime="2019-9-27" class="time text-uppercase">
-                    <stong class="date">27</stong>
-                    <stong class="month text-muted">September</stong><br>
-                    <strong class="day text-muted">Friday</strong>
-                </time>
-            </div>
-        </div>
-    </div>
-</div>
+
+<!-- upcoming events -->
+@include('pages.events.main')
+
+<!-- recents news -->
+@include('pages.news.main')
+
 @endsection
