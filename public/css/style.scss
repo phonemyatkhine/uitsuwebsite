@@ -4,10 +4,12 @@ $commonShadow: 2px 2px 8px black;
 $lato : "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $opensans : "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-@import './navbar';
-@import './footer';
 @import './breakpoints';
 @import './mixins';
+@import './navbar';
+@import './footer';
+@import './auth';
+
 .loader-holder {
     top: 0;
     left: 0;

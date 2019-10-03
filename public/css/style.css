@@ -59,6 +59,81 @@ footer .copyright-banner {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+#login-section, #register-section {
+  position: relative;
+  background-image: url("/image/cover-one.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  min-width: 300px;
+  min-height: 100%;
+}
+
+#login-section::before, #register-section::before {
+  content: "";
+  z-index: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#login-section #login-form-container, #login-section #register-form-container, #register-section #login-form-container, #register-section #register-form-container {
+  padding-top: 200px;
+  padding-bottom: 200px;
+  color: #ffffff;
+  z-index: 2;
+  width: 100vw;
+}
+
+#login-section #login-form-container h1, #login-section #register-form-container h1, #register-section #login-form-container h1, #register-section #register-form-container h1 {
+  font-weight: 300;
+  text-transform: uppercase;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 30px;
+}
+
+#login-section #login-form-container form, #login-section #register-form-container form, #register-section #login-form-container form, #register-section #register-form-container form {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  #login-section #login-form-container form, #login-section #register-form-container form, #register-section #login-form-container form, #register-section #register-form-container form {
+    width: 562px;
+  }
+}
+
+#login-section #login-form-container form input, #login-section #register-form-container form input, #register-section #login-form-container form input, #register-section #register-form-container form input {
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  #login-section #login-form-container, #login-section #register-form-container, #register-section #login-form-container, #register-section #register-form-container {
+    max-width: 562px;
+  }
+}
+
+#register-form-container {
+  padding-top: 160px !important;
+}
+
+#login-btn, #register-btn {
+  color: #ffffff;
+  font-style: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+#login-btn:hover, #register-btn:hover {
+  color: #ffc000;
+}
+
+.custom-control-label::before {
+  background-color: transparent;
+}
+
 .loader-holder {
   top: 0;
   left: 0;

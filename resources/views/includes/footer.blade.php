@@ -15,7 +15,7 @@
             </dl>
         </address>
         <div class="copyright-banner mt-5">
-            <a href="#">UITSU</a> | &copy; {{ date('Y') }}, All rights reserved.
+            <a href="/">UITSU</a> | &copy; {{ date('Y') }}, All rights reserved.
         </div>
     </div>
 </footer>

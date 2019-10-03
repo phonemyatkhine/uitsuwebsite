@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'PagesController@index');
+
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
