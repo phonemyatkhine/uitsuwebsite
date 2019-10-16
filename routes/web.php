@@ -18,3 +18,7 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/profile', 'UsersController@index')->name('profile');
+
+Route::get('/news', 'NewsController@index')->name('news');

@@ -18,6 +18,9 @@
                     <a class="nav-link" href="#">Clubs</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/news">News</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">Events</a>
                 </li>
                 <li class="nav-item">
@@ -35,7 +38,7 @@
                     <a class="nav-link dropdown-toggle" id="account" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                     <div class="dropdown-menu dropdown-primary text-capitalize" aria-labelledby="account">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">

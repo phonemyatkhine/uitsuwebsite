@@ -6,7 +6,7 @@
         <div class="d-flex h-100">
             <div class="row align-self-center">
                 <div class="container" id="login-form-container">
-                    <h1>Login Please to Continue</h1>
+                    <h1>Login to Continue</h1>
                     <form class="mb-3" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="md-form">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="custom-control custom-checkbox mb-4">
                             <input type="checkbox" class="custom-control-input" id="remember"  name="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <label class="custom-control-label" for="remember">Remeber Login</label>
+                            <label class="custom-control-label" for="remember">Remember Login</label>
                         </div>
                         <button class="btn btn-outline-light d-block ml-0">Login</button>
                     </form>

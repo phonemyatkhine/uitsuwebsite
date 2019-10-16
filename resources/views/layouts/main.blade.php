@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
-    <meta name="copyright"content="">
+    <meta name="copyright" content="">
     <!-- open graph meta tags for social media and others -->
     <meta property="og:title" content="{{ env('APP_NAME') }}">
     <meta property="og:type" content="website">
@@ -70,15 +70,15 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
     <!-- required on ready -->
     <script>
-        // nothing 
+        // nothing
     </script>
     <!-- custom js script -->
     <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
     @yield('add-js')
 
-<!-- 
-    
-    UI/UX template by 
+<!--
+
+    UI/UX template by
     * A N Phyoe
     * Aung Htet Nyein
     * Phyo Hein Kyaw
@@ -89,15 +89,15 @@
     Backend by
     * Phone Myat Khine
     * Hein Thanth
-     ____ ___.______________   _________ __            .___             __         /\  ____ ___      .__               
-    |    |   \   \__    ___/  /   _____//  |_ __ __  __| _/____   _____/  |_  _____)/ |    |   \____ |__| ____   ____  
-    |    |   /   | |    |     \_____  \\   __\  |  \/ __ |/ __ \ /    \   __\/  ___/  |    |   /    \|  |/  _ \ /    \ 
+     ____ ___.______________   _________ __            .___             __         /\  ____ ___      .__
+    |    |   \   \__    ___/  /   _____//  |_ __ __  __| _/____   _____/  |_  _____)/ |    |   \____ |__| ____   ____
+    |    |   /   | |    |     \_____  \\   __\  |  \/ __ |/ __ \ /    \   __\/  ___/  |    |   /    \|  |/  _ \ /    \
     |    |  /|   | |    |     /        \|  | |  |  / /_/ \  ___/|   |  \  |  \___ \   |    |  /   |  \  (  <_> )   |  \
     |______/ |___| |____|    /_______  /|__| |____/\____ |\___  >___|  /__| /____  >  |______/|___|  /__|\____/|___|  /
-                                     \/                 \/    \/     \/          \/                \/               \/ 
-                                     
+                                     \/                 \/    \/     \/          \/                \/               \/
+
     Copyright (c) {{ date('Y') }} UIT Student Union. All Rights Reserved
-    
+
 -->
 
 </body>
