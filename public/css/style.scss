@@ -10,6 +10,7 @@ $opensans : "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @import './footer';
 @import './auth';
 @import './profile';
+@import './news';
 
 .loader-holder {
     top: 0;
@@ -18,7 +19,7 @@ $opensans : "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     bottom: 0;
     z-index: 9999;
     position: fixed;
-    background-color: rgba(255, 255, 255, 0.9); 
+    background-color: rgba(255, 255, 255, 0.9);
 }
 .loader-holder .block {
     top: 50%;
@@ -26,7 +27,7 @@ $opensans : "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     position: absolute;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
 }
 a.custom-btn {
     color: #000000;
@@ -99,7 +100,7 @@ html, body {
         left: 0px;
     }
     #intro-text-wrapper {
-        max-width: 562px; 
+        max-width: 562px;
         z-index: 1;
     }
     h1 {
@@ -202,47 +203,49 @@ html, body {
     }
 }
 #news-section {
-    .news-item {
-        background-color: #ffffff;
-        border: 1px solid #ebebeb;
-        margin-bottom: 20px;
-        .news-image {
-            text-align: center;
-            img {
-                width: 171px;
-                @include sm {
-                    width: 100%;
-                }
-            }
-        }
-        .news-info {
-            border-top: 2px solid $secondary;
-            .news-title {
-                line-height: 1.1;
-                a {
-                    color: #000000;
-                    font-size: 18px;
-                    font-family: $lato;
-                    line-height: 1.1;
-                    &:hover {
-                        color: $secondary;
+    .news {
+        .news-item {
+            background-color: #ffffff;
+            border: 1px solid #ebebeb;
+            margin-bottom: 20px;
+            .news-image {
+                text-align: center;
+                img {
+                    width: 171px;
+                    @include sm {
+                        width: 100%;
                     }
                 }
             }
-            .news-description {
-                line-height: 1.6;
-                font-size: 14px;
-                font-family: $opensans;
-                color: #777777;
-            }
-            .news-date {
-                font-size: 12px;
-                font-family: $opensans;
-                color: #777777;
-                a {
+            .news-info {
+                border-top: 2px solid $secondary;
+                .news-title {
+                    line-height: 1.1;
+                    a {
+                        color: #000000;
+                        font-size: 18px;
+                        font-family: $lato;
+                        line-height: 1.1;
+                        &:hover {
+                            color: $secondary;
+                        }
+                    }
+                }
+                .news-description {
+                    line-height: 1.6;
+                    font-size: 14px;
+                    font-family: $opensans;
                     color: #777777;
-                    &:hover {
-                        color: $secondary;
+                }
+                .news-date {
+                    font-size: 12px;
+                    font-family: $opensans;
+                    color: #777777;
+                    a {
+                        color: #777777;
+                        &:hover {
+                            color: $secondary;
+                        }
                     }
                 }
             }
