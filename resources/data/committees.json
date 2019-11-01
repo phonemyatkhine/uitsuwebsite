@@ -1,0 +1,34 @@
+{
+    "1" : {
+        "name" : "Public Relations",
+        "description" : ""
+    },
+    "2" : {
+        "name" : "Interuniversity Relations",
+        "description" : ""
+    },
+    "3" : {
+        "name" : "Technology",
+        "description" : ""
+    },
+    "4" : {
+        "name" : "Arts",
+        "description" : ""
+    },
+    "5" : {
+        "name" : "Literature",
+        "description" : ""
+    },
+    "6" : {
+        "name" : "Sports",
+        "description" : ""
+    },
+    "7" : {
+        "name" : "Education",
+        "description" : ""
+    },
+    "8" : {
+        "name" : "Finance",
+        "description" : ""
+    }
+}

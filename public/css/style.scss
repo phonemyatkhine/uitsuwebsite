@@ -29,7 +29,8 @@ $opensans : "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
-a.custom-btn {
+.custom-btn {
+    background-color: #ffffff;
     color: #000000;
     border: 2px solid $primary;
     padding: 7px 12px;

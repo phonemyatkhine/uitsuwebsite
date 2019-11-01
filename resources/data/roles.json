@@ -1,0 +1,44 @@
+{
+    "1" : {
+        "name" : "president",
+        "level" : 1,
+        "description" : "Has full access to everything",
+        "standalone": true
+    },
+    "2" : {
+        "name" : "vice-president",
+        "level" : 2,
+        "description" : "also has full access to everything. But can't undo what 1 did",
+        "standalone": true
+    },
+    "3" : {
+        "name" : "secretary",
+        "level" : 3,
+        "description" : "also has full access to everything. But can't undo what 1 & 2 did",
+        "standalone": true
+    },
+    "4" : {
+        "name" : "commitee-head",
+        "level" : 4,
+        "description" : "Has full access to the Commitee",
+        "standalone": false
+    },
+    "5" : {
+        "name" : "commitee-member",
+        "level" : 5,
+        "description" : "Has normal access to the Commitee",
+        "standalone": false
+    },
+    "6" : {
+        "name" : "club-head",
+        "level" : 6,
+        "description" : "Has full access to Event",
+        "standalone": false
+    },
+    "7" : {
+        "name" : "club-member",
+        "level" : 7,
+        "description" : "Has normal access to club",
+        "standalone": false
+    }
+}
