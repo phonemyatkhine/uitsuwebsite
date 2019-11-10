@@ -19,13 +19,35 @@
                 <textarea name="content" id="content" rows="5" class="form-control" placeholder="News Content"></textarea>
             </div>
             <div class="form-group">
+                <label for="tag">News Tags</label>
+                <input type="text" name="tag" id="tag" class="form-control" placeholder="News Tags (Seperate with Comma)">
+            </div>
+            <div class="form-group">
+                <label for="committee">Committee</label>
+                <select name="committee" id="committee" class="form-control">
+                    <option value="" selected>--  --</option>
+                    @foreach (App\Committee::all() as $committee)
+                        <option value="{{ $committee->id }}">{{ $committee->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="club">Committee</label>
+                <select name="club" id="club" class="form-control">
+                    <option value="" selected>--  --</option>
+                    @foreach (App\Club::all() as $club)
+                        <option value="{{ $club->id }}">{{ $club->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="cover_image">News Cover Image</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="cover_image">Upload</span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                        <input type="file" name="cover_image" class="custom-file-input" id="inputGroupFile01"
                         aria-describedby="cover_image">
                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                     </div>
@@ -52,7 +74,7 @@
         toolbar: "undo redo forecolor backcolor link image",
         image_dimensions: false,
         image_class_list: [
-            {title: 'Responsive', value: 'img-responsive'}
+            {title: 'Responsive', value: 'img-fluid'}
         ],
         file_picker_types: 'image media',
         image_uploadtab: true,

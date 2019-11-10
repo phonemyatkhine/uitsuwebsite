@@ -1,0 +1,30 @@
+{
+    "1" : {
+        "name" : "Football",
+        "description" : ""
+    },
+    "2" : {
+        "name" : "BBall",
+        "description" : ""
+    },
+    "3" : {
+        "name" : "Technology",
+        "description" : ""
+    },
+    "4" : {
+        "name" : "Arts",
+        "description" : ""
+    },
+    "5" : {
+        "name" : "Literature",
+        "description" : ""
+    },
+    "6" : {
+        "name" : "Sports",
+        "description" : ""
+    },
+    "7" : {
+        "name" : "Education",
+        "description" : ""
+    }
+}

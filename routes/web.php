@@ -24,6 +24,7 @@ Route::get('/profile', 'UsersController@index')->name('profile');
 Route::get('/news', 'NewsController@index')->name('news');
 Route::get('/news/create', 'NewsController@create')->name('news.create');
 Route::post('/news/upload', 'NewsController@upload')->name('news.upload');
+Route::post('/news/store', 'NewsController@store')->name('news.store');
 
 Route::get('/insert-role', function () {
     $roles = json_decode(file_get_contents(base_path('resources/data/roles.json')), true);
@@ -44,6 +45,17 @@ Route::get('/insert-committee', function () {
     DB::statement('ALTER TABLE `committees` AUTO_INCREMENT=1;');
     foreach($committees as $committee) {
         DB::table('committees')->insert([
+            'name' => $committee['name'],
+            'description' => $committee['description'],
+        ]);
+    }
+});
+Route::get('/insert-club', function () {
+    $committees = json_decode(file_get_contents(base_path('resources/data/clubs.json')), true);
+    DB::table('clubs')->delete();
+    DB::statement('ALTER TABLE `clubs` AUTO_INCREMENT=1;');
+    foreach($committees as $committee) {
+        DB::table('clubs')->insert([
             'name' => $committee['name'],
             'description' => $committee['description'],
         ]);
