@@ -24,7 +24,7 @@ class CreateNewsTable extends Migration
             $table->string('cover_image')->nullable();
             $table->integer('owner');
             $table->boolean('hidden')->default(0);
-            $table->integer('hided_by')->default(0);
+            $table->integer('hidden_by')->default(0);
             $table->timestamps();
         });
     }

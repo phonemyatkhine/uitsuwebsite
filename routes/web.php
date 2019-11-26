@@ -25,6 +25,12 @@ Route::get('/news', 'NewsController@index')->name('news');
 Route::get('/news/create', 'NewsController@create')->name('news.create');
 Route::post('/news/upload', 'NewsController@upload')->name('news.upload');
 Route::post('/news/store', 'NewsController@store')->name('news.store');
+Route::get('/news/v/{id}', 'NewsController@view')->name('news.view');
+Route::get('/news/e/{id}', 'NewsController@edit')->name('news.edit');
+Route::post('/news/update', 'NewsController@update')->name('news.update');
+Route::post('/news/hide', 'NewsController@hide')->name('news.hide');
+Route::post('/news/unhide', 'NewsController@unhide')->name('news.unhide');
+Route::post('/news/delete', 'NewsController@delete')->name('news.delete');
 
 Route::get('/insert-role', function () {
     $roles = json_decode(file_get_contents(base_path('resources/data/roles.json')), true);

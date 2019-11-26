@@ -3,32 +3,37 @@
 @section('main')
 <div id="create-news-form">
     <div class="container">
-        <form action="/news/store" method="POST" enctype="multipart/form-data">
+        <form action="/news/update" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="id" value="{{ $news->id }}">
             <h1>Post News</h1>
             <div class="form-group">
                 <label for="title">News Title</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="News Title">
+                <input type="text" name="title" id="title" class="form-control" placeholder="News Title" value="{{ $news->title }}">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" rows="3" class="form-control" placeholder="News Description"></textarea>
+                <textarea name="description" id="description" rows="3" class="form-control" placeholder="News Description" value="{{ $news->description }}"></textarea>
             </div>
             <div class="form-group">
                 <label for="content">News Body</label>
-                <textarea name="content" id="content" rows="5" class="form-control" placeholder="News Content"></textarea>
+                <textarea name="content" id="content" rows="5" class="form-control" placeholder="News Content">{{ $news->content }}</textarea>
             </div>
             <div class="form-group">
                 <label for="tag">News Tags</label>
-                <input type="text" name="tag" id="tag" class="form-control" placeholder="News Tags (Seperate with Comma)">
+                <input type="text" name="tag" id="tag" class="form-control" placeholder="News Tags (Seperate with Comma)" value="{{ $news->tag }}">
             </div>
             <div class="form-group">
                 <label for="committee">Committee</label>
                 <select name="committee" id="committee" class="form-control">
-                    <option value="" selected>--  --</option>
+                    <option value="">--  --</option>
                     @if(App\Role::where('id', Auth::user()->role)->first()->standalone)
                         @foreach (App\Committee::all() as $committee)
+                            @if($committee->id == $news->committee)
+                            <option value="{{ $committee->id }}" selected>{{ $committee->name }}</option>
+                            @else
                             <option value="{{ $committee->id }}">{{ $committee->name }}</option>
+                            @endif
                         @endforeach
                     @else
                         @isset(Auth::user()->committee)
@@ -40,10 +45,14 @@
             <div class="form-group">
                 <label for="club">Club</label>
                 <select name="club" id="club" class="form-control">
-                    <option value="" selected>--  --</option>
+                    <option value="">--  --</option>
                     @if(App\Role::where('id', Auth::user()->role)->first()->standalone)
                         @foreach (App\Club::all() as $club)
+                            @if($club->id == $news->club)
                             <option value="{{ $club->id }}">{{ $club->name }}</option>
+                            @else
+                            <option value="{{ $club->id }}" selected>{{ $club->name }}</option>
+                            @endif
                         @endforeach
                     @else
                         @isset(Auth::user()->club)
