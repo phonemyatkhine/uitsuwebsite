@@ -21,7 +21,7 @@
                     <a class="nav-link" href="/news">News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Events</a>
+                    <a class="nav-link" href="/events">Events</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Committee</a>

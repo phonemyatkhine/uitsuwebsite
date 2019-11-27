@@ -32,6 +32,17 @@ Route::post('/news/hide', 'NewsController@hide')->name('news.hide');
 Route::post('/news/unhide', 'NewsController@unhide')->name('news.unhide');
 Route::post('/news/delete', 'NewsController@delete')->name('news.delete');
 
+Route::get('/events', 'EventsController@index')->name('events');
+Route::get('/events/create', 'EventsController@create')->name('events.create');
+Route::post('/events/upload', 'EventsController@upload')->name('events.upload');
+Route::post('/events/store', 'EventsController@store')->name('events.store');
+Route::get('/events/v/{id}', 'EventsController@view')->name('events.view');
+Route::get('/events/e/{id}', 'EventsController@edit')->name('events.edit');
+Route::post('/events/update', 'EventsController@update')->name('events.update');
+Route::post('/events/hide', 'EventsController@hide')->name('events.hide');
+Route::post('/events/unhide', 'EventsController@unhide')->name('events.unhide');
+Route::post('/events/delete', 'EventsController@delete')->name('events.delete');
+
 Route::get('/insert-role', function () {
     $roles = json_decode(file_get_contents(base_path('resources/data/roles.json')), true);
     DB::table('roles')->delete();
