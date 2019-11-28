@@ -10,7 +10,7 @@ class NewsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth'])->except(['index', 'view']);
     }
 
     public function index() {
@@ -36,10 +36,14 @@ class NewsController extends Controller
 
     public function edit($id) {
         $news = News::where('id', $id)->first();
-        return view('pages.news.edit')->with([
-            'pageTitle' => 'Edit News',
-            'news' => $news
-        ]);
+        if(Auth::user()->can('edit', $news)) {
+            return view('pages.news.edit')->with([
+                'pageTitle' => 'Edit News',
+                'news' => $news
+            ]);
+        } else {
+            return back();
+        }
     }
 
     public function upload(Request $request) {
@@ -119,7 +123,9 @@ class NewsController extends Controller
 
     public function delete(Request $request) {
         $news = News::where('id', $request->input('id'))->first();
-        $news->delete();
+        if(Auth::user()->can('delete', $news)) {
+            $news->delete();
+        }
         return redirect('/news');
     }
 }

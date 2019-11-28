@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::get('/home', function() {
+    return redirect('/', 301);
+});
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');

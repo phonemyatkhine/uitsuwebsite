@@ -49,9 +49,9 @@
                     @if(App\Role::where('id', Auth::user()->role)->first()->standalone)
                         @foreach (App\Club::all() as $club)
                             @if($club->id == $news->club)
-                            <option value="{{ $club->id }}">{{ $club->name }}</option>
-                            @else
                             <option value="{{ $club->id }}" selected>{{ $club->name }}</option>
+                            @else
+                            <option value="{{ $club->id }}">{{ $club->name }}</option>
                             @endif
                         @endforeach
                     @else
@@ -86,6 +86,9 @@
     tinymce.init({
         selector: '#content',
         plugins: "table image link imagetools autoresize",
+        jsplusInclude: {
+            framework: "b4" // or "b4", "f5", "f6", "f6x"
+        },
         menu: {
             format: { 
                 title: "Format", 

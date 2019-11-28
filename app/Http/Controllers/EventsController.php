@@ -10,7 +10,7 @@ class EventsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth'])->except(['index', 'view']);
     }
 
     public function index() {
@@ -36,10 +36,14 @@ class EventsController extends Controller
 
     public function edit($id) {
         $events = Events::where('id', $id)->first();
-        return view('pages.events.edit')->with([
-            'pageTitle' => 'Edit Events',
-            'events' => $events
-        ]);
+        if(Auth::user()->can('edit', $events)) {
+            return view('pages.events.edit')->with([
+                'pageTitle' => 'Edit Events',
+                'events' => $events
+            ]);
+        } else {
+            return back();
+        }
     }
 
     public function upload(Request $request) {
@@ -125,7 +129,9 @@ class EventsController extends Controller
 
     public function delete(Request $request) {
         $events = Events::where('id', $request->input('id'))->first();
-        $events->delete();
+        if(Auth::user()->can('delete', $events)) {
+            $events->delete();
+        }
         return redirect('/events');
     }
 }

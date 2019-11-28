@@ -15,9 +15,13 @@
             {!! $news->content !!}
         </div>
         <hr>
+        @can('edit', $news)
         <a href="/news/e/{{ $news->id }}" class="btn btn-sm btn-primary">Edit</a>
+        @endcan
+        @can('delete', $news)
         <button type="button" class="btn btn-sm btn-danger" onclick="event.preventDefault();
         document.getElementById('news-delete-form').submit();">Danger</button>
+        @endcan
         @if($news->hidden)
             @can('unhide', $news)
             <button class="btn btn-sm btn-success"

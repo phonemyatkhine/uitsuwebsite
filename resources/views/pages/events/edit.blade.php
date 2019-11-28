@@ -1,26 +1,39 @@
 @extends('layouts.main')
 
 @section('main')
-<div id="create-news-form">
+<div id="create-events-form" class="mt-5 py-5">
     <div class="container">
-        <form action="/news/store" method="POST" enctype="multipart/form-data">
+        <form action="/events/update" method="POST" enctype="multipart/form-data">
             @csrf
-            <h1>Post News</h1>
+            <input type="hidden" name="id" value="{{ $events->id }}">
+            <h1>Post Events</h1>
             <div class="form-group">
-                <label for="title">News Title</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="News Title">
+                <label for="title">Events Title</label>
+                <input type="text" name="title" id="title" class="form-control" placeholder="Events Title" value="{{ $events->title }}">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" rows="3" class="form-control" placeholder="News Description"></textarea>
+                <textarea name="description" id="description" rows="3" class="form-control" placeholder="Events Description">{{ $events->description }}</textarea>
             </div>
             <div class="form-group">
-                <label for="content">News Body</label>
-                <textarea name="content" id="content" rows="5" class="form-control" placeholder="News Content"></textarea>
+                <label for="start">Start Time</label>
+                <input type="datetime-local" name="start" class="form-control" id="start" value="{{ $events->start }}" required>
             </div>
             <div class="form-group">
-                <label for="tag">News Tags</label>
-                <input type="text" name="tag" id="tag" class="form-control" placeholder="News Tags (Seperate with Comma)">
+                <label for="end">End Time</label>
+                <input type="datetime-local" name="end" class="form-control" id="end" value="{{ $events->end }}" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Address</label>
+                <textarea name="location" id="location" rows="3" class="form-control" placeholder="Address" >{{ $events->location }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="content">Events Body</label>
+                <textarea name="content" id="content" rows="5" class="form-control" placeholder="Events Content">{{ $events->content }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="tag">Events Tags</label>
+                <input type="text" name="tag" id="tag" class="form-control" placeholder="Events Tags (Seperate with Comma)" value="{{ $events->tag }}">
             </div>
             <div class="form-group">
                 <label for="committee">Committee</label>
@@ -28,7 +41,11 @@
                     <option value="" selected>--  --</option>
                     @if(App\Role::where('id', Auth::user()->role)->first()->standalone)
                         @foreach (App\Committee::all() as $committee)
+                            @if($committee->id == $events->committee)
+                            <option value="{{ $committee->id }}" selected>{{ $committee->name }}</option>
+                            @else
                             <option value="{{ $committee->id }}">{{ $committee->name }}</option>
+                            @endif
                         @endforeach
                     @else
                         @isset(Auth::user()->committee)
@@ -43,7 +60,11 @@
                     <option value="" selected>--  --</option>
                     @if(App\Role::where('id', Auth::user()->role)->first()->standalone)
                         @foreach (App\Club::all() as $club)
-                            <option value="{{ $club->id }}">{{ $club->name }}</option>
+                        @if($club->id == $events->club)
+                        <option value="{{ $club->id }}" selected>{{ $club->name }}</option>
+                        @else
+                        <option value="{{ $club->id }}">{{ $club->name }}</option>
+                        @endif
                         @endforeach
                     @else
                         @isset(Auth::user()->club)
@@ -53,7 +74,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="cover_image">News Cover Image</label>
+                <label for="cover_image">Events Cover Image</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="cover_image">Upload</span>
@@ -94,8 +115,8 @@
         relative_urls : false,
         file_picker_types: 'image media',
         image_uploadtab: true,
-        images_upload_base_path: '/storage/news/images',
-        images_upload_url: '/news/upload',
+        images_upload_base_path: '/storage/events/images',
+        images_upload_url: '/events/upload',
         images_upload_credentials: true,
         automatic_uploads: true,
         images_upload_handler: function (blobInfo, success, failure) {
@@ -103,7 +124,7 @@
 
             xhr = new XMLHttpRequest();
             xhr.withCredentials = false;
-            xhr.open('POST', '/news/upload');
+            xhr.open('POST', '/events/upload');
             var token = '{{ csrf_token() }}';
             xhr.setRequestHeader("X-CSRF-Token", token);
             xhr.onload = function() {
