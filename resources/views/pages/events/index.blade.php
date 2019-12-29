@@ -8,9 +8,11 @@
                 <h1>Upcoming Events</h1>
             </div>
             <p>Recent and upcoming educational events listed here</p>
+            @if(Auth::check() && Auth::user()->can('create', App\Events::class))
             <div class="view-more-btn">
                 <a href="/events/create" class="custom-btn">Post Event</a>
             </div>
+            @endif
         </div>
         <!-- Recent events start here -->
         @if(count($events))
@@ -56,6 +58,7 @@
         @else
         No Event :')
         @endif
+        @if(Auth::check())
         <hr class="my-4">
         @if(count($hidden))
         <div class="section-title">
@@ -103,6 +106,9 @@
             </div>
         </div>
         @endforeach
+        @else
+        No Hidden Events :)
+        @endif
         @endif
     </div>
 </div>

@@ -11,6 +11,18 @@ class EventsPermission
 {
     use HandlesAuthorization;
 
+    public function create(User $user)
+    {
+        $current_user_role = Role::where('id', $user->role)->first();
+
+        $allow = [1, 2, 3, 4, 5, 6];
+
+        if (in_array($current_user_role->id, $allow)) {
+            return true;
+        }
+        return false;
+    }
+
     public function hide(User $user, Events $events) {
         $current_user_role = Role::where('id', $user->role)->first();
         $events_owner_role = Role::where('id', User::where('id', $events->owner)->first()->role)->first();

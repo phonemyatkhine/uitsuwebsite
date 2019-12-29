@@ -14,6 +14,7 @@
         <div class="news-content">
             {!! $news->content !!}
         </div>
+        @if(Auth::check())
         <hr>
         @can('edit', $news)
         <a href="/news/e/{{ $news->id }}" class="btn btn-sm btn-primary">Edit</a>
@@ -51,6 +52,7 @@
             @csrf
             <input type="hidden" name="id" value="{{ $news->id }}">
         </form>
+        @endif
     </div>
 </div>
 @endsection

@@ -8,9 +8,11 @@
                 <h1>News</h1>
             </div>
             <p>They happens recently days.</p>
+            @if(Auth::check() && Auth::user()->can('create', App\News::class))
             <div class="view-more-btn">
                 <a href="/news/create" class="custom-btn">Post a news</a>
             </div>
+            @endif
         </div>
         <!-- News post start here -->
         <div class="news">
@@ -79,6 +81,7 @@
             @else
             No News :')
             @endif
+            @if(Auth::check())
             <hr class="my-4">
             @if(count($hidden))
                 <div class="section-title">
@@ -150,6 +153,7 @@
                 @endfor
             @else
             No Hidden News :')
+            @endif
             @endif
         </div>
     </div>

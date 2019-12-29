@@ -37,6 +37,7 @@
         <div class="events-content">
             {!! $events->content !!}
         </div>
+        @if(Auth::check())
         <hr>
         @can('edit', $events)
         <a href="/events/e/{{ $events->id }}" class="btn btn-sm btn-primary">Edit</a>
@@ -74,6 +75,7 @@
             @csrf
             <input type="hidden" name="id" value="{{ $events->id }}">
         </form>
+        @endif
     </div>
 </div>
 @endsection

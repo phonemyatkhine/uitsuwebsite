@@ -46,6 +46,8 @@ Route::post('/events/hide', 'EventsController@hide')->name('events.hide');
 Route::post('/events/unhide', 'EventsController@unhide')->name('events.unhide');
 Route::post('/events/delete', 'EventsController@delete')->name('events.delete');
 
+Route::get('/admin', 'AdminController@index')->name('admin');
+
 Route::get('/insert-role', function () {
     $roles = json_decode(file_get_contents(base_path('resources/data/roles.json')), true);
     DB::table('roles')->delete();
