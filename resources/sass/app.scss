@@ -40,6 +40,12 @@ $opensans : "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         color: #ffffff!important;
     }
 }
+.custom-a {
+    color: #000000!important;
+    &:hover {
+        color: $secondary!important;
+    }
+}
 .addressColumn {
     font-size: 14px;
     padding: 15px 18px 10px 30px;
@@ -65,9 +71,19 @@ $opensans : "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 400;
 }
 
+.bg-theme-primary {
+    background-color: $primary;
+}
 .bg-gray {
     background-color: #f6f6f6;
 }
+.font-24 {
+    font-size: 24px;
+}
+.font-18 {
+    font-size: 18px;
+}
+
 .section-title {
     position: relative;
     margin-bottom: 40px;

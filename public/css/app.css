@@ -59,7 +59,8 @@ footer .copyright-banner {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#login-section, #register-section {
+#login-section,
+#register-section {
   position: relative;
   background-image: url("/image/cover-one.png");
   background-size: cover;
@@ -69,7 +70,8 @@ footer .copyright-banner {
   min-height: 100%;
 }
 
-#login-section::before, #register-section::before {
+#login-section::before,
+#register-section::before {
   content: "";
   z-index: 0;
   pointer-events: none;
@@ -81,7 +83,10 @@ footer .copyright-banner {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-#login-section #login-form-container, #login-section #register-form-container, #register-section #login-form-container, #register-section #register-form-container {
+#login-section #login-form-container,
+#login-section #register-form-container,
+#register-section #login-form-container,
+#register-section #register-form-container {
   padding-top: 200px;
   padding-bottom: 200px;
   color: #ffffff;
@@ -89,29 +94,44 @@ footer .copyright-banner {
   width: 100vw;
 }
 
-#login-section #login-form-container h1, #login-section #register-form-container h1, #register-section #login-form-container h1, #register-section #register-form-container h1 {
+#login-section #login-form-container h1,
+#login-section #register-form-container h1,
+#register-section #login-form-container h1,
+#register-section #register-form-container h1 {
   font-weight: 300;
   text-transform: uppercase;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 30px;
 }
 
-#login-section #login-form-container form, #login-section #register-form-container form, #register-section #login-form-container form, #register-section #register-form-container form {
+#login-section #login-form-container form,
+#login-section #register-form-container form,
+#register-section #login-form-container form,
+#register-section #register-form-container form {
   width: 100%;
 }
 
 @media (min-width: 768px) {
-  #login-section #login-form-container form, #login-section #register-form-container form, #register-section #login-form-container form, #register-section #register-form-container form {
+  #login-section #login-form-container form,
+  #login-section #register-form-container form,
+  #register-section #login-form-container form,
+  #register-section #register-form-container form {
     width: 562px;
   }
 }
 
-#login-section #login-form-container form input, #login-section #register-form-container form input, #register-section #login-form-container form input, #register-section #register-form-container form input {
+#login-section #login-form-container form input,
+#login-section #register-form-container form input,
+#register-section #login-form-container form input,
+#register-section #register-form-container form input {
   color: #ffffff;
 }
 
 @media (min-width: 768px) {
-  #login-section #login-form-container, #login-section #register-form-container, #register-section #login-form-container, #register-section #register-form-container {
+  #login-section #login-form-container,
+  #login-section #register-form-container,
+  #register-section #login-form-container,
+  #register-section #register-form-container {
     max-width: 562px;
   }
 }
@@ -120,13 +140,15 @@ footer .copyright-banner {
   padding-top: 140px !important;
 }
 
-#login-btn, #register-btn {
+#login-btn,
+#register-btn {
   color: #ffffff;
   font-style: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 
-#login-btn:hover, #register-btn:hover {
+#login-btn:hover,
+#register-btn:hover {
   color: #ffc000;
 }
 
@@ -292,7 +314,6 @@ footer .copyright-banner {
   top: 50%;
   left: 50%;
   position: absolute;
-  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
@@ -307,6 +328,14 @@ footer .copyright-banner {
   border-color: #ffc000 !important;
   background-color: #ffc000 !important;
   color: #ffffff !important;
+}
+
+.custom-a {
+  color: #000000 !important;
+}
+
+.custom-a:hover {
+  color: #ffc000 !important;
 }
 
 .addressColumn {
@@ -338,8 +367,20 @@ footer .copyright-banner {
   font-weight: 400;
 }
 
+.bg-theme-primary {
+  background-color: #00c7ff;
+}
+
 .bg-gray {
-  background-color: #f6f6f6!important;
+  background-color: #f6f6f6;
+}
+
+.font-24 {
+  font-size: 24px;
+}
+
+.font-18 {
+  font-size: 18px;
 }
 
 .section-title {
@@ -385,7 +426,8 @@ footer .copyright-banner {
   }
 }
 
-html, body {
+html,
+body {
   height: 100%;
   min-width: 300px;
 }
@@ -592,4 +634,4 @@ html, body {
 #news-section .news .news-item .news-info .news-date a:hover {
   color: #ffc000;
 }
-/*# sourceMappingURL=style.css.map */
+

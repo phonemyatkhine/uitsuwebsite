@@ -11,10 +11,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="#">CEC</a>
-                </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ Route('cec') }}">CEC</a>
+                </li>
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="#">Clubs</a>
                 </li> --}}
                 <li class="nav-item">
@@ -27,7 +27,7 @@
                     <a class="nav-link" href="#">Committee</a>
                 </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="{{ Route('contact') }}">Contact</a>
                 </li>
                 @auth
                 <li class="nav-item">

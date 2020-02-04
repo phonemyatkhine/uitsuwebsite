@@ -11,10 +11,16 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
 Route::get('/', 'PagesController@index');
 Route::get('/home', function() {
     return redirect('/', 301);
 });
+
+Route::get('/contact', 'PagesController@contact')->name('contact');
+Route::get('/cec', 'PagesController@cec')->name('cec');
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
@@ -52,9 +58,6 @@ Route::post('/files/save', 'FilesController@save')->name('files.save');
 Route::get('/files/{id}/download', 'FilesController@download')->name('files.download');
 Route::get('/files/{id}/view', 'FilesController@responseFile')->name('files.view');
 Route::post('/files/{id}/delete', 'FilesController@delete')->name('files.delete');
-
-
-
 
 Route::get('/insert-role', function () {
     $roles = json_decode(file_get_contents(base_path('resources/data/roles.json')), true);
