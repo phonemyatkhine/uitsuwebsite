@@ -46,7 +46,15 @@ Route::post('/events/hide', 'EventsController@hide')->name('events.hide');
 Route::post('/events/unhide', 'EventsController@unhide')->name('events.unhide');
 Route::post('/events/delete', 'EventsController@delete')->name('events.delete');
 
-Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/files', 'FilesController@index')->name('files');
+Route::get('/files/upload', 'FilesController@upload')->name('files.upload');
+Route::post('/files/save', 'FilesController@save')->name('files.save');
+Route::get('/files/{id}/download', 'FilesController@download')->name('files.download');
+Route::get('/files/{id}/view', 'FilesController@responseFile')->name('files.view');
+Route::post('/files/{id}/delete', 'FilesController@delete')->name('files.delete');
+
+
+
 
 Route::get('/insert-role', function () {
     $roles = json_decode(file_get_contents(base_path('resources/data/roles.json')), true);

@@ -11,27 +11,32 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="#">CEC</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Clubs</a>
+                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ Route('news') }}">News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/news">News</a>
+                    <a class="nav-link" href="{{ Route('events') }}">Events</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/events">Events</a>
-                </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="#">Committee</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                @auth
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ Route('files') }}">Files</a>
+                </li>
+                @endauth
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Accounts</a>
+                    <a class="nav-link" href="{{ Route('login') }}">Accounts</a>
                 </li>
                 @else
                 <li class="nav-item dropdown">
@@ -39,9 +44,9 @@
                         aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                     <div class="dropdown-menu dropdown-primary text-capitalize" aria-labelledby="account">
                         <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
-                        @if(Auth::user()->role = 1)
+                        {{-- @if(Auth::user()->role = 1)
                         <a class="dropdown-item" href="{{ route('admin') }}">Admin</a>
-                        @endif
+                        @endif --}}
                         <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
