@@ -93,9 +93,9 @@
             framework: "b4" // or "b4", "f5", "f6", "f6x"
         },
         menu: {
-            format: { 
-                title: "Format", 
-                items: "forecolor backcolor" 
+            format: {
+                title: "Format",
+                items: "forecolor backcolor"
             }
         },
         toolbar: "undo redo forecolor backcolor link image",

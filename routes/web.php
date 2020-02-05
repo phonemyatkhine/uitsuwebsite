@@ -24,11 +24,18 @@ Route::get('/cec', 'PagesController@cec')->name('cec');
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
-Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('/register', 'Auth\RegisterController@register');
+
+if(count(App\User::all()) == 0) {
+    Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('/register', 'Auth\RegisterController@register');
+}
+
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/profile', 'UsersController@index')->name('profile');
+
+Route::get('/admin', 'AdminController@index')->name('admin');
+Route::post('/admin/user/edit', 'AdminController@editUser')->name('admin.user.edit');
 
 Route::get('/news', 'NewsController@index')->name('news');
 Route::get('/news/create', 'NewsController@create')->name('news.create');
@@ -55,9 +62,9 @@ Route::post('/events/delete', 'EventsController@delete')->name('events.delete');
 Route::get('/files', 'FilesController@index')->name('files');
 Route::get('/files/upload', 'FilesController@upload')->name('files.upload');
 Route::post('/files/save', 'FilesController@save')->name('files.save');
-Route::get('/files/{id}/download', 'FilesController@download')->name('files.download');
-Route::get('/files/{id}/view', 'FilesController@responseFile')->name('files.view');
-Route::post('/files/{id}/delete', 'FilesController@delete')->name('files.delete');
+Route::get('/files/download', 'FilesController@download')->name('files.download');
+Route::get('/files/view', 'FilesController@responseFile')->name('files.view');
+Route::post('/files/delete', 'FilesController@delete')->name('files.delete');
 
 Route::get('/insert-role', function () {
     $roles = json_decode(file_get_contents(base_path('resources/data/roles.json')), true);

@@ -10,11 +10,19 @@ class FilesController extends Controller
     public function __construct() {
         $this->middleware(['auth'])->except(['download', 'responseFile']);
     }
-    public function index()
+    public function index(Request $request)
     {
+        if($request->input('path')) {
+            $list = $this->ls(storage_path("/app/files").($request->input('path')));
+            if($list == false) {
+                return redirect('/files');
+            }
+        } else {
+            $list = $this->ls(storage_path("/app/files"));
+        }
         return view('pages.files.index')->with([
             'pageTitle' => 'Files',
-            'files' => File::all()
+            'list' => $list,
         ]);
     }
     public function upload() {
@@ -22,32 +30,29 @@ class FilesController extends Controller
             'pageTitle' => "Upload File"
         ]);
     }
-    public function save(Request $request) {
-        echo "Uploading ...";
-        $file = new File;
-        $file->name = $request->input('name');
-        $file->description = $request->input('description');
-        $file->owner = \Auth::user()->id;
-        $file->tag = $request->input('tag');
-        if($request->hasFile('file')) {
-            $ext = $request->file('file')->getClientOriginalExtension();
-            $filename = sha1(time()).'.'.$ext;
-            $request->file('file')->storeAs('public/files/', $filename);
-            $file->filename = "storage/files/".$filename;
+    public function ls($path) {
+        if (strpos(realpath($path), realpath(storage_path("/app/files"))) !== false) {
+            return scandir(realpath($path));
+        } else {
+            return false;
         }
-        if($file->save()) {
-            return redirect('/files');
+    }
+    public function save(Request $request) {
+        if($request->hasFile('file')) {
+            $filename = $request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs("/files".$request->input('path'), $filename);
+            return redirect('/files?path='.$request->input('path'));
         }
     }
 
-    public function responseFile($id) {
-        $file = File::where('id', $id)->first();
-        if($file == NULL) {
+    public function responseFile(Request $request) {
+        $file = realpath(storage_path("/app/files").($request->input('path')));
+        if(!file_exists($file) || is_dir($file)) {
             abort(404);
+        } elseif(strpos($file, realpath(storage_path("/app/files"))) === true) {
+            return redirect("/files");
         } else {
-            $filename = basename($file->filename);
-            $filepath = storage_path("app/public/files/".$filename);
-            $ext = pathinfo($filepath, PATHINFO_EXTENSION);
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
             if(in_array($ext, array('gif', 'jpg', 'jpeg', 'png', 'ico', 'svg', 'pdf'))) {
                 if($ext == 'gif') {
                     $type = 'image/gif';
@@ -62,34 +67,34 @@ class FilesController extends Controller
                 } elseif($ext == 'pdf') {
                     $type = 'application/pdf';
                 }
-                return response()->file($filepath, ['Content-Type', $type]);
-            } elseif($content = file_get_contents($filepath)) {
-                echo "<pre>".htmlspecialchars($content)."</pre>";
+                return response()->file($file, ['Content-Type', $type]);
             } else {
-                return response()->download($filepath);
+                return response()->download($file);
             }
         }
 
     }
 
-    public function download($id) {
-        $file = File::where('id', $id)->first();
-        if($file == NULL) {
+    public function download(Request $request) {
+        $file = realpath(storage_path("/app/files").($request->input('path')));
+        if(!file_exists($file) || is_dir($file)) {
             abort(404);
+        } elseif(strpos($file, realpath(storage_path("/app/files"))) === true) {
+            return redirect("/files");
         } else {
-            $filename = basename($file->filename);
-            $filepath = storage_path("app/public/files/".$filename);
-            $ext = pathinfo($filepath, PATHINFO_EXTENSION);
-            $nametodownload = $file->name.".".$ext;
-            return response()->download($filepath, $nametodownload, ['Content-Type', "application/octet-stream"]);
+            return response()->download($file);
         }
     }
 
-    public function delete($id) {
-        $file = File::where('id', $id)->first();
-        if($file->owner == \Auth::user()->id) {
-            $file->delete();
+    public function delete(Request $request) {
+        $file = realpath(storage_path("/app/files").($request->input('path')));
+        if(!file_exists($file) || is_dir($file)) {
+            abort(404);
+        } elseif(strpos($file, realpath(storage_path("/app/files"))) === true) {
+            return redirect("/files");
+        } else {
+            unlink($file);
+            return redirect('/files?path='.$request->input('redirectpath'));
         }
-        return redirect('/files');
     }
 }
