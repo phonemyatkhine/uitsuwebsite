@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Mail\UserCreated;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -25,6 +29,20 @@ class AdminController extends Controller
         $user->committee = $request->input('committee');
         $user->club = $request->input('club');
         $user->save();
+        return "success";
+    }
+
+    public function addUser(Request $request) {
+        $pwd = Str::random(8);
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'role' => $request->input('role'),
+            'committee' => $request->input('committee'),
+            'club' => $request->input('club'),
+            'password' => Hash::make($pwd)
+        ]);
+        Mail::to($request->input('email'))->send(new UserCreated($request->input('email'), $pwd));
         return "success";
     }
 }

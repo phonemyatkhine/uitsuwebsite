@@ -9,7 +9,7 @@
             </div>
             <p>registered users are listed here</p>
             <div class="view-more-btn">
-                <a href="{{ Route('files.upload') }}" class="custom-btn">upload</a>
+                <button id="add-user-button" class="custom-btn">upload</a>
             </div>
         </div>
         <div class="table-responsive text-nowrap">
@@ -26,6 +26,39 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr id="add-user-form" class="d-none w-100">
+                        <th scope="row" class="align-middle">#</th>
+                        <input type="hidden" name="id">
+                        <td class="form-group align-middle"><input type="text" class="form-control form-control-sm" name="name" id="name" placeholder="Name"></td>
+                        <td class="form-group align-middle"><input type="email" class="form-control form-control-sm" name="email" id="email" placeholder="Email Address"></td>
+                        <td class="form-group align-middle">
+                            <select class="form-control form-control-sm" id="role" name="role">
+                                @foreach(App\Role::all() as $role)
+                                <option value="{{ $role->level }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td class="form-group align-middle">
+                            <select name="committee" id="committee" class="form-control form-control-sm">
+                                <option value="">None</option>
+                                @foreach(App\Committee::all() as $committee)
+                                <option value="{{ $committee->id }}">{{ $committee->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td class="form-group align-middle">
+                            <select class="form-control form-control-sm" id="club" name="club">
+                                <option value="">None</option>
+                                @foreach(App\Club::all() as $club)
+                                <option value="{{ $club->id }}">{{ $club->name }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td class="align-middle">
+                            <button type="button" class="fas fa-save px-2 bg-transparent border-0" id="user-save"></button>
+                            <button id="user-cancel" class="fas fa-times px-2 bg-transparent border-0"></button>
+                        </td>
+                    </tr>
                     @foreach($users as $sr => $user)
                     <tr>
                         <th scope="row" class="align-middle">{{ $sr + 1 }}</th>
@@ -36,7 +69,7 @@
                         <td class="align-middle">{{ isset($user->club) ? App\Club::where('id', $user->club)->first()->name : "None" }}</td>
                         <td class="align-middle">
                             <button class="fas fa-edit px-2 user-edit-button bg-transparent border-0"></button>
-                            <a href="#" class="fas fa-trash px-2"></a>
+                            <a href="#" class="fas fa-trash px-2 bg-transparent border-0"></a>
                         </td>
                     </tr>
                     <tr id="edit-user-{{ $user->id }}-form" class="d-none w-100">
@@ -80,8 +113,8 @@
                             </select>
                         </td>
                         <td class="align-middle">
-                            <button type="button" class="fas fa-save px-2 bg-white border-0" id="user-save-{{ $user->id }}"></button>
-                            <a href="#" class="fas fa-times px-2"></a>
+                            <button type="button" class="fas fa-save px-2 bg-transparent border-0" id="user-save-{{ $user->id }}"></button>
+                            <button id="user-cancel-{{ $user->id }}" class="fas fa-times px-2 bg-transparent border-0"></button>
                         </td>
                     </tr>
                     @endforeach
@@ -119,6 +152,30 @@
             }
         });
     }
+    function addUser(name, email, role, committee, club) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/admin/user/create',
+            method: 'POST',
+            data: {
+                name: name,
+                email: email,
+                role: role,
+                committee: committee,
+                club: club
+            },
+            success: (msg) => {
+                location.reload();
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+    }
     $('.user-edit-button').click((e) => {
         var editFormTr = e.target.parentElement.parentElement.nextElementSibling;
         $(editFormTr).removeClass('d-none');
@@ -138,7 +195,27 @@
             var club = $(editFormTr).children("td").children("#" + "club-" + id ).val();
             updateUser(id, name, email, role, committee, club);
         });
+        $("#user-cancel-" + id).click(() => {
+            $(editFormTr).removeClass('d-table-row');
+            $(editFormTr).addClass('d-none');
+        });
 
+    });
+    $('#add-user-button').click(() => {
+        $("#add-user-form").removeClass('d-none');
+        $("#add-user-form").addClass('d-table-row');
+        $("#user-save").click(() => {
+            var name = $("#add-user-form").children("td").children("#name").val();
+            var email = $("#add-user-form").children("td").children("#email").val();
+            var role = $("#add-user-form").children("td").children("#role").val();
+            var committee = $("#add-user-form").children("td").children("#committee").val();
+            var club = $("#add-user-form").children("td").children("#club").val();
+            addUser(name, email, role, committee, club);
+        });
+        $("#user-cancel").click(() => {
+            $("#add-user-form").removeClass('d-table-row');
+            $("#add-user-form").addClass('d-none');
+        });
     });
 </script>
 @endsection

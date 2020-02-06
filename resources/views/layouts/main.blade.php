@@ -40,7 +40,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
     <!-- Custom Style CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    @yield('add-css')
 </head>
 <body>
     <!-- page preloader -->

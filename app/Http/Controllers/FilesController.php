@@ -88,13 +88,27 @@ class FilesController extends Controller
 
     public function delete(Request $request) {
         $file = realpath(storage_path("/app/files").($request->input('path')));
-        if(!file_exists($file) || is_dir($file)) {
+        if(!file_exists($file)) {
             abort(404);
         } elseif(strpos($file, realpath(storage_path("/app/files"))) === true) {
             return redirect("/files");
         } else {
-            unlink($file);
+            if(is_dir($file)) {
+                rmdir($file);
+            } else {
+                unlink($file);
+            }
             return redirect('/files?path='.$request->input('redirectpath'));
         }
+    }
+
+    public function mkdir(Request $request) {
+        $path = realpath(storage_path("/app/files").($request->input('path')));
+        $name = $request->input('name');
+        $created_path = $path.'/'.$name;
+        if(!file_exists($created_path)) {
+            mkdir($created_path);
+        }
+        return back();
     }
 }

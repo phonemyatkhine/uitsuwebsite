@@ -33,9 +33,13 @@ if(count(App\User::all()) == 0) {
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/profile', 'UsersController@index')->name('profile');
+Route::get('/profile/{id}', 'UsersController@showProfile')->name('profile.view')->where('id', '[0-9]+');
+Route::post('/profile/info/update', 'UsersController@updateInfo')->name('profile.updateInfo');
+Route::post('/profile/passwd', 'UsersController@passwd')->name('profile.passwd');
 
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::post('/admin/user/edit', 'AdminController@editUser')->name('admin.user.edit');
+Route::post('/admin/user/create', 'AdminController@addUser')->name('admin.user.edit');
 
 Route::get('/news', 'NewsController@index')->name('news');
 Route::get('/news/create', 'NewsController@create')->name('news.create');
@@ -61,6 +65,7 @@ Route::post('/events/delete', 'EventsController@delete')->name('events.delete');
 
 Route::get('/files', 'FilesController@index')->name('files');
 Route::get('/files/upload', 'FilesController@upload')->name('files.upload');
+Route::post('/files/mkdir', 'FilesController@mkdir')->name('files.mkdir');
 Route::post('/files/save', 'FilesController@save')->name('files.save');
 Route::get('/files/download', 'FilesController@download')->name('files.download');
 Route::get('/files/view', 'FilesController@responseFile')->name('files.view');

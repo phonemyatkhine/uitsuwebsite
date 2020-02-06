@@ -43,11 +43,40 @@
                 @endforeach
             </ol>
         </nav>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <form action="/files/mkdir" class="modal-dialog modal-dialog-centered" role="document" method="POST">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Create Folder</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                @csrf
+                                <input type="hidden" name="path" value="{{ $listed_path }}">
+                                <label for="name">Folder Name</label>
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Folder Name">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn custom-btn" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn custom-btn">Save changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Filename</th>
+                    <th scope="col">
+                        Filename
+                        <div class="float-right">
+                            <button class="fas fa-folder-plus font-24 bg-transparent border-0" data-toggle="modal" data-target="#exampleModalCenter"></button>
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +89,6 @@
                                 <a href="/files/?path={{ $path.'/'.$file }}"><i class="fas fa-folder"></i>&nbsp;&nbsp;{{ $file }}</a>
                                 <div class="d-inline-block float-right">
                                     <a class="fas fa-link px-2" href="" id="copy_url_{{ $count }}" data-toggle="tooltip" data-placement="top" title="click to copy"></a>
-                                    <a class="fas fa-download px-2" href="{{ url("/files/download?path=".$path.'/'.$file) }}"></a>
                                     @if($file != "..")
                                     <a class="fas fa-trash px-2" href="#" onclick="
                                         event.preventDefault();

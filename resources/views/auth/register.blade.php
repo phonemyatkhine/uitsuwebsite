@@ -28,15 +28,6 @@
                             @endif
                         </div>
                         <div class="md-form">
-                            <input type="text" id="roll_number" class="form-control{{ $errors->has('roll_number') ? ' is-invalid' : '' }}" name="roll_number" value="{{ old('roll_number') }}" required>
-                            <label for="roll_number">Roll Number</label>
-                            @if ($errors->has('roll_number'))
-                                <span class="invalid-feedback">
-                                <strong>{{ $errors->first('roll_number') }}</strong>
-                            </span>
-                            @endif
-                        </div>
-                        <div class="md-form">
                             <input type="email" id="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
                             <label for="email">Email Address</label>
                             @if ($errors->has('email'))
