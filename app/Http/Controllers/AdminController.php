@@ -45,4 +45,12 @@ class AdminController extends Controller
         Mail::to($request->input('email'))->send(new UserCreated($request->input('email'), $pwd));
         return "success";
     }
+
+    public function delete(Request $request) {
+        $user = User::where('id', $request->input('id'))->first();
+        if($user != null) {
+            $user->delete();
+        }
+        return back();
+    }
 }

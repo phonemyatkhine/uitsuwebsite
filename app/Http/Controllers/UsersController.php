@@ -7,6 +7,9 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 
 use App\User;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UsersController extends Controller
 {
@@ -57,5 +60,20 @@ class UsersController extends Controller
             'phone_number' => $request->input('phone_number')
         ]);
         return back();
+    }
+
+    public function updateProfilePicture(Request $request) {
+        //echo json_encode($request->input('image'));
+        $image = $request->input('image');
+        $image = str_replace('data:image/jpeg;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = Str::random(10).'.'.'jpeg';
+        $path = Storage::put('public/profile_pictures/'.$imageName, base64_decode($image));
+        $status = User::where('id', \Auth::user()->id)->first()->update([
+            'profile_picture' => 'storage/profile_pictures/'.$imageName
+        ]);
+        if($status) {
+            return "success";
+        }
     }
 }

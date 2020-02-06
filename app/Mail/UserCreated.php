@@ -30,7 +30,7 @@ class UserCreated extends Mailable
     public function build()
     {
         return $this->from('no-reply@uitsudomain.org')
-                ->view('pages.admin.usercreated')
+                ->view('pages.email.usercreated')
                 ->with(['email' => $this->email, 'passwords' => $this->passwords]);
     }
 }

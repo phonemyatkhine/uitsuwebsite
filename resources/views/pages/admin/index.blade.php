@@ -69,7 +69,14 @@
                         <td class="align-middle">{{ isset($user->club) ? App\Club::where('id', $user->club)->first()->name : "None" }}</td>
                         <td class="align-middle">
                             <button class="fas fa-edit px-2 user-edit-button bg-transparent border-0"></button>
-                            <a href="#" class="fas fa-trash px-2 bg-transparent border-0"></a>
+                            <a class="fas fa-trash px-2" href="#" onclick="
+                                        event.preventDefault();
+                                        if(confirm('Are you sure to delete?')){document.getElementById('delete-form-{{ $user->id }}').submit();}"
+                            ></a>
+                            <form id="delete-form-{{ $user->id }}" action="/admin/user/delete" method="POST" style="display: none;">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $user->id }}">
+                            </form>
                         </td>
                     </tr>
                     <tr id="edit-user-{{ $user->id }}-form" class="d-none w-100">

@@ -20,6 +20,7 @@ Route::get('/home', function() {
 });
 
 Route::get('/contact', 'PagesController@contact')->name('contact');
+Route::post('/contact', 'PagesController@sendContactEmail');
 Route::get('/cec', 'PagesController@cec')->name('cec');
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -36,10 +37,12 @@ Route::get('/profile', 'UsersController@index')->name('profile');
 Route::get('/profile/{id}', 'UsersController@showProfile')->name('profile.view')->where('id', '[0-9]+');
 Route::post('/profile/info/update', 'UsersController@updateInfo')->name('profile.updateInfo');
 Route::post('/profile/passwd', 'UsersController@passwd')->name('profile.passwd');
+Route::post('/profile/updatepp', 'UsersController@updateProfilePicture')->name('profile.updatepp');
 
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::post('/admin/user/edit', 'AdminController@editUser')->name('admin.user.edit');
 Route::post('/admin/user/create', 'AdminController@addUser')->name('admin.user.edit');
+Route::post('/admin/user/delete', 'AdminController@delete')->name('admin.user.delete');
 
 Route::get('/news', 'NewsController@index')->name('news');
 Route::get('/news/create', 'NewsController@create')->name('news.create');

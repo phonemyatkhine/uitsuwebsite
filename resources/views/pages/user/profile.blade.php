@@ -1,11 +1,69 @@
 @extends('layouts.main')
 
 @section('main')
+<div id="cropImagePop" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                    <div style="display: block; width: 300px; height: 300px;">
+                    <div id="upload-demo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Update Profile Picture</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="#" id="update-profile-picture">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input item-img" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01" accept="image/x-png,image/gif,image/jpeg">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+    </div>
+</div>
 <div class="container" id="profile-section">
     <div class="row">
         <div class="col-md-4 mb-3">
             <div class="border">
-                <img src="https://api.adorable.io/avatars/225/abott@adorable.png" class="card-img-top" alt="...">
+                @if($user->profile_picture != null)
+                <img id="item-img-output" src="{{ asset($user->profile_picture) }}" class="card-img-top" alt="{{ $user->name }}">
+                @else
+                <img id="item-img-output" src="https://api.adorable.io/avatars/225/{{ Str::random(8) }}.png" class="card-img-top" alt="{{ $user->name }}">
+                @endif
+                <div class="card-img-overlay pt-2">
+                    <button type="button" class="float-right border-0 bg-transparent" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-edit"></i></button>
+                </div>
                 <div class="card-body profile-info">
                     <dl>
                         @if($user->phone_number != null)
@@ -119,6 +177,81 @@
 
 @section('add-js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js" integrity="sha256-bQTfUf1lSu0N421HV2ITHiSjpZ6/5aS6mUNlojIGGWg=" crossorigin="anonymous"></script>
+
+<script>
+var $uploadCrop,
+		tempFilename,
+		rawImg,
+		imageId;
+		function readFile(input) {
+ 			if (input.files && input.files[0]) {
+              var reader = new FileReader();
+	            reader.onload = function (e) {
+					$('.upload-demo').addClass('ready');
+					$('#cropImagePop').modal('show');
+                    $("#exampleModalCenter").modal("hide");
+		            rawImg = e.target.result;
+	            }
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	        else {
+		        swal("Sorry - you're browser doesn't support the FileReader API");
+		    }
+		}
+
+		$uploadCrop = $('#upload-demo').croppie({
+			viewport: {
+				width: 250,
+				height: 250,
+			},
+			enforceBoundary: false,
+			enableExif: true
+		});
+		$('#cropImagePop').on('shown.bs.modal', function(){
+			// alert('Shown pop');
+			$uploadCrop.croppie('bind', {
+        		url: rawImg
+        	}).then(function(){
+        		// nothing to do
+        	});
+		});
+
+		$('.item-img').on('change', function () {
+            imageId = $(this).data('id'); tempFilename = $(this).val();
+            $('#cancelCropBtn').data('id', imageId); readFile(this);
+        });
+		$('#cropImageBtn').on('click', function (ev) {
+			$uploadCrop.croppie('result', {
+				type: 'base64',
+				format: 'jpeg',
+				size: {width: 1000, height: 1000}
+			}).then(function (resp) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '/profile/updatepp',
+                    method: 'POST',
+                    data: {
+                        'image': resp,
+                    },
+                    success: (msg) => {
+                        if(msg == "success") {
+                            $('#item-img-output').attr('src', resp);
+                            $('#cropImagePop').modal('hide');
+                            document.getElementById("update-profile-picture").reset();
+                        }
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                })
+			});
+		});
+</script>
+
 @endsection
 
 @section('add-css')

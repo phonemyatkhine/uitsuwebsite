@@ -11,18 +11,19 @@
         </div>
         <div class="row">
             <div class="col-lg-6 mb-4">
-                <form>
+                <form action="{{ route('contact') }}" method="POST">
+                    @csrf
                     <div class="form-group mb-4">
-                        <input type="text" name="name" id="name" class="form-control form-control-lg" placeholder="Your Name">
+                        <input type="text" name="name" id="name" class="form-control form-control-lg" placeholder="Your Name" required>
                     </div>
                     <div class="form-group mb-4">
-                        <input type="email" class="form-control form-control-lg" id="email" placeholder="Enter email">
+                        <input type="email" name="email" class="form-control form-control-lg" id="email" placeholder="Enter email" required>
                     </div>
                     <div class="form-group mb-4">
-                        <input type="text" name="subject" id="subject" class="form-control form-control-lg" placeholder="Subject">
+                        <input type="text" name="subject" id="subject" class="form-control form-control-lg" placeholder="Subject" required>
                     </div>
                     <div class="form-group mb-4">
-                        <textarea class="form-control form-control-lg" name="message" id="message" rows="3" placeholder="Message"></textarea>
+                        <textarea class="form-control form-control-lg" name="message" id="message" rows="3" placeholder="Message" required></textarea>
                     </div>
                     <button type="submit" class="mt-4 btn-block custom-btn">Send</button>
                 </form>
