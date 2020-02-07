@@ -22,6 +22,8 @@ class PagesController extends Controller
 
     public function sendContactEmail(Request $request) {
         Mail::to('uitsu@uit.edu.mm')->send(new ContactEmail($request->input('name'), $request->input('email'), $request->input('subject'), $request->input('message')));
-        return back();
+        return back()->with([
+            "success" => "Contact email sent successfully"
+        ]);
     }
 }

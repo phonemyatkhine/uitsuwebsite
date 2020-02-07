@@ -42,7 +42,7 @@ class NewsController extends Controller
                 'news' => $news
             ]);
         } else {
-            return back();
+            return back()->with(['error' => "You can't edit this news!"]);
         }
     }
 
@@ -69,7 +69,7 @@ class NewsController extends Controller
             $news->cover_image = "storage/news/cover_image/".$filename;
         }
         $news->save();
-        return redirect('/news');
+        return redirect('/news')->with(['success' => "News posted successfully!"]);
     }
 
     public function update(Request $request) {
@@ -88,7 +88,7 @@ class NewsController extends Controller
             $news->cover_image = "storage/news/cover_image/".$filename;
         }
         $news->save();
-        return redirect('/news');
+        return redirect('/news')->with(['success' => "News edited successfully!"]);
     }
 
     public function view($id) {
@@ -108,7 +108,7 @@ class NewsController extends Controller
             $news->hidden_by = Auth::user()->id;
             $news->save();
         }
-        return redirect('/news');
+        return redirect('/news')->with(['success' => "News hided!"]);
     }
 
     public function unhide(Request $request) {
@@ -118,7 +118,7 @@ class NewsController extends Controller
             $news->hidden_by = 0;
             $news->save();
         }
-        return redirect('/news');
+        return redirect('/news')->with(["success" => "News is now public"]);
     }
 
     public function delete(Request $request) {
@@ -126,6 +126,6 @@ class NewsController extends Controller
         if(Auth::user()->can('delete', $news)) {
             $news->delete();
         }
-        return redirect('/news');
+        return redirect('/news')->with(['success' => "News deleted!"]);
     }
 }

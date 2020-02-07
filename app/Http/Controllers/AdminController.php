@@ -51,6 +51,6 @@ class AdminController extends Controller
         if($user != null) {
             $user->delete();
         }
-        return back();
+        return back()->with(['success' => "User deleted!"]);
     }
 }

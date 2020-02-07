@@ -32,6 +32,9 @@
     <!-- page link -->
     <link rel="icon" href="{{ asset(env('APP_LOGO')) }}">
 
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
@@ -50,7 +53,7 @@
 
     <!-- add navbar -->
     @include('includes.navbar')
-
+    @include('includes.message')
     <!-- main content start here -->
 
     @yield('main')
@@ -60,8 +63,6 @@
     <!-- add footer -->
     @include('includes.footer')
 
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->

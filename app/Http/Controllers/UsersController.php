@@ -41,7 +41,7 @@ class UsersController extends Controller
             'password' => ['required', 'confirmed'],
         ]);
         User::where('id', \Auth::user()->id)->first()->update(['password'=> Hash::make($request->password)]);
-        return back();
+        return back()->with(["success" => "passwords updated successfully!"]);
     }
 
     public function updateInfo(Request $request) {
@@ -59,7 +59,7 @@ class UsersController extends Controller
             'biography' => $request->input('bio'),
             'phone_number' => $request->input('phone_number')
         ]);
-        return back();
+        return back()->with(["success" => "profile updated!"]);
     }
 
     public function updateProfilePicture(Request $request) {

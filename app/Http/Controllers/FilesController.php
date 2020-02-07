@@ -15,7 +15,7 @@ class FilesController extends Controller
         if($request->input('path')) {
             $list = $this->ls(storage_path("/app/files").($request->input('path')));
             if($list == false) {
-                return redirect('/files');
+                return redirect('/files')->with(['error' => "Do you think I'm stupid?"]);;
             }
         } else {
             $list = $this->ls(storage_path("/app/files"));
@@ -41,7 +41,7 @@ class FilesController extends Controller
         if($request->hasFile('file')) {
             $filename = $request->file('file')->getClientOriginalName();
             $request->file('file')->storeAs("/files".$request->input('path'), $filename);
-            return redirect('/files?path='.$request->input('path'));
+            return redirect('/files?path='.$request->input('path'))->with(['success' => "File uploaded successfully"]);
         }
     }
 
@@ -49,8 +49,8 @@ class FilesController extends Controller
         $file = realpath(storage_path("/app/files").($request->input('path')));
         if(!file_exists($file) || is_dir($file)) {
             abort(404);
-        } elseif(strpos($file, realpath(storage_path("/app/files"))) === true) {
-            return redirect("/files");
+        } elseif(strpos($file, realpath(storage_path("/app/files"))) !== false) {
+            return redirect("/files")->with(['error' => "Do you think I'm stupid?"]);
         } else {
             $ext = pathinfo($file, PATHINFO_EXTENSION);
             if(in_array($ext, array('gif', 'jpg', 'jpeg', 'png', 'ico', 'svg', 'pdf'))) {
@@ -79,8 +79,8 @@ class FilesController extends Controller
         $file = realpath(storage_path("/app/files").($request->input('path')));
         if(!file_exists($file) || is_dir($file)) {
             abort(404);
-        } elseif(strpos($file, realpath(storage_path("/app/files"))) === true) {
-            return redirect("/files");
+        } elseif(strpos($file, realpath(storage_path("/app/files"))) !== false) {
+            return redirect("/files")->with(['error' => "Do you think I'm stupid?"]);
         } else {
             return response()->download($file);
         }
@@ -90,25 +90,33 @@ class FilesController extends Controller
         $file = realpath(storage_path("/app/files").($request->input('path')));
         if(!file_exists($file)) {
             abort(404);
-        } elseif(strpos($file, realpath(storage_path("/app/files"))) === true) {
-            return redirect("/files");
+        } elseif(strpos($file, realpath(storage_path("/app/files"))) !== false) {
+            return redirect("/files")->with(['error' => "Do you think I'm stupid?"]);
         } else {
             if(is_dir($file)) {
                 rmdir($file);
             } else {
                 unlink($file);
             }
-            return redirect('/files?path='.$request->input('redirectpath'));
+            return redirect('/files?path='.$request->input('redirectpath'))->with(['success' => "File delete successfully"]);
         }
     }
 
     public function mkdir(Request $request) {
-        $path = realpath(storage_path("/app/files").($request->input('path')));
+        $base = storage_path("app/files");
+        $path = realpath($base.($request->input('path')));
         $name = $request->input('name');
-        $created_path = $path.'/'.$name;
-        if(!file_exists($created_path)) {
+        $created_path = $path."/".$name;
+
+        if(file_exists($created_path)) {
+            return back()->with(['error' => "filename exists"]);
+        } else {
             mkdir($created_path);
         }
-        return back();
+        if(strpos(realpath($created_path), $base) !== false) {
+            return back()->with(['success' => "Folder created successfully!"]);
+        } else {
+            return back()->with(['error' => "Do you think I'm stupid?"]);
+        }
     }
 }

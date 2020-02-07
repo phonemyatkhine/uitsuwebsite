@@ -30,7 +30,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="embed-responsive" style="height: 400px;">
-                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.409065015922!2d96.13317361435068!3d16.855647188399352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1eb5a634a7f33%3A0x4fa272a704e38513!2sUniversity+of+Information+Technology+-+UIT!5e0!3m2!1sen!2smm!4v1535598823596" style="border:0" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.4044020589613!2d96.13308881482708!3d16.855878122352777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1936f625d4ba7%3A0x9676670831769962!2sUniversity%20Of%20Information%20Technology!5e0!3m2!1sen!2smm!4v1581060262926!5m2!1sen!2smm" style="border:0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

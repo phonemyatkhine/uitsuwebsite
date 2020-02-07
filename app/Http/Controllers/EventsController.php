@@ -42,7 +42,7 @@ class EventsController extends Controller
                 'events' => $events
             ]);
         } else {
-            return back();
+            return back()->with(['error' => "You can't edit this event!"]);
         }
     }
 
@@ -72,7 +72,7 @@ class EventsController extends Controller
             $events->cover_image = "storage/events/cover_image/".$filename;
         }
         $events->save();
-        return redirect('/events');
+        return redirect('/events')->with(['success' => "Event posted successfully!"]);
     }
 
     public function update(Request $request) {
@@ -94,7 +94,7 @@ class EventsController extends Controller
             $events->cover_image = "storage/events/cover_image/".$filename;
         }
         $events->save();
-        return redirect('/events');
+        return redirect('/events')->with(['success' => "Event information updated!"]);
     }
 
     public function view($id) {
@@ -114,7 +114,7 @@ class EventsController extends Controller
             $events->hidden_by = Auth::user()->id;
             $events->save();
         }
-        return redirect('/events');
+        return redirect('/events')->with(["success" => "Event hided successfully!"]);
     }
 
     public function unhide(Request $request) {
@@ -124,7 +124,7 @@ class EventsController extends Controller
             $events->hidden_by = 0;
             $events->save();
         }
-        return redirect('/events');
+        return redirect('/events')->with(['success' => "Event is now public"]);
     }
 
     public function delete(Request $request) {
@@ -132,6 +132,6 @@ class EventsController extends Controller
         if(Auth::user()->can('delete', $events)) {
             $events->delete();
         }
-        return redirect('/events');
+        return redirect('/events')->with(['success' => "Event deleted!"]);
     }
 }
